@@ -1,0 +1,87 @@
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+  <meta http-equiv="Pragma" content="no-cache" />
+  <meta http-equiv="Expires" content="0" />
+</head>
+
+<body>
+  <div id="root"></div>
+
+  <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://unpkg.com/@material-ui/core@4.11.0/umd/material-ui.production.min.js"></script>
+  <script src="./fact.js"></script>
+  <script src="./fetcher.js"></script>
+
+
+
+  <script type="text/babel">
+
+      const App = props => {
+
+        const { useState, Fragment } = React
+
+        const [form, setForm] = useState({cif:"34612616", zile: 60, submitted: false })
+
+        const [data, setData] = useState()
+        
+
+        const inputHandler = name => ev => setForm({...form, [name]: ev.target.value})
+
+        const submitHandler = async () =>{
+          let res = await fetchData(form)
+          setForm({...form, submitted: true})
+          setData(res)
+        }
+
+
+        return ( 
+          <div>  
+            {!form.submitted 
+              ? (
+                <Fragment>
+                CUI-ul DVS: <input type = "text" value = {form.cif} onChange = {inputHandler("cif")}/>
+             <br/>
+             Nr. de zile  <input type = "number" step="1" value = {form.zile} onChange = {inputHandler("zile")}/>
+             <br/><br/>
+             {!form.submitted && (
+              <button onClick = {submitHandler} >INTEROGARE ANAF</button>
+             )}
+             </Fragment>
+              )
+              : (
+                <Fragment>
+                    <button onClick = {()=>setForm({...form, submitted: false})} >INTEROGARE NOUA</button>
+                    <hr/>
+                    <div style = {{height: "70vh", padding: "10px", margin: "10px", overflow: "auto"}}>
+                      <pre>
+                          {JSON.stringify(data, null, 4)}
+                        </pre>
+                    </div>
+                </Fragment>
+              )
+            
+             }
+
+           
+            
+          </div>
+        )
+      }
+
+
+    ReactDOM.render(
+      <App />,
+      document.getElementById('root'),
+    );
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,12 @@
+{
+  "name": "e-factura-rest-api",
+  "version": "1.0.0",
+  "description": "check fact transmission and multiple occurences",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "author": "",
+  "license": "ISC"
+}
