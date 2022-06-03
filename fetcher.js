@@ -8,7 +8,7 @@ const fetchData = async({cif,zile}) => {
         result = await fetch(
             `${API}?zile=${zile}&cif=${cif}`, 
             {
-                mode: "no-cors",
+                // mode: "no-cors",
                 method: "GET",
                 headers: {
                     "Access-Control-Allow-Origin": '*',
