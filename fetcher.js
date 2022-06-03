@@ -5,7 +5,14 @@ const API = " https://webserviceapl.anaf.ro/prod/FCTEL/rest/listaMesajeFactura"
 const fetchData = async({cif,zile}) => {
     let result;
     try {
-        result = await fetch(`${API}?zile=${zile}&cif=${cif}`)
+        result = await fetch(
+            `${API}?zile=${zile}&cif=${cif}`, 
+            {
+                method: "GET",
+                headers: "'Access-Control-Allow-Origin', '*'"
+            },
+
+        )
         result = await result.json()
     } catch (error) {
         res = {err: true, msg: "erorar: "+ error}
