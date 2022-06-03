@@ -13,6 +13,7 @@ const fetchData = async({cif,zile}) => {
                 headers: {
                     "Access-Control-Allow-Origin": '*',
                     "Access-Control-Allow-Methods": 'GET, POST, PUT, DELETE, OPTIONS',
+                    "Sec-Fetch-Site": "cross-site",
                     "Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
                 
                 }
